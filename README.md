@@ -25,7 +25,7 @@ Start the server
   npm run server
 ```
 
-The server should now be running. You can access the application by opening a web browser and entering the following URL:
+The server should now be running. You can access the application by opening a postman and entering the following URL:
 
 ```bash
   http://localhost:4001/api/v1/products
