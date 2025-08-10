@@ -15,17 +15,14 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  npm install
+  npm install --force
 
-  or 
-
-  npm install react-material-ui-carousel --save --legacy-peer-deps
 ```
 
 Start the server
 
 ```bash
-  npm start
+  npm run server
 ```
 
 The server should now be running. You can access the application by opening a web browser and entering the following URL:
