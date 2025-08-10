@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "product-api-collection",
+		"name": "Product API Collection",
+		"description": "Complete Postman collection for testing the JSON-based Product API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Public Endpoints",
+			"item": [
+				{
+					"name": "Get All Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						},
+						"description": "Returns a list of all products with pagination support"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products with Pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products?page=1&limit=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						},
+						"description": "Get products with pagination (page 1, 5 products per page)"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Products by Category - Apparel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products?category=Apparel",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Apparel"
+								}
+							]
+						},
+						"description": "Filter products by Apparel category"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Products by Category - Electronics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products?category=Electronics",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Electronics"
+								}
+							]
+						},
+						"description": "Filter products by Electronics category"
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Products by Category - Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products?category=Books",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Books"
+								}
+							]
+						},
+						"description": "Filter products by Books category"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Product by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						},
+						"description": "Get a single product by its ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Test Wireless Headphones\",\n  \"price\": 89.99,\n  \"description\": \"High-quality wireless headphones with noise cancellation\",\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						},
+						"description": "Create a new product (Bonus feature with validation)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product - Validation Test (Invalid)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"\",\n  \"price\": -10,\n  \"description\": \"\",\n  \"category\": \"\",\n  \"imageUrl\": \"invalid-url\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						},
+						"description": "Test validation by sending invalid data (should return 400 error)"
+					},
+					"response": []
+				}
+			],
+			"description": "Public endpoints that don't require authentication"
+		},
+	
+		{
+			"name": "Admin Endpoints",
+			"item": [
+				{
+					"name": "Get All Products (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"description": "JWT token for admin user"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"products"
+							]
+						},
+						"description": "Get all products (admin view)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"description": "JWT token for admin user"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Admin Created Product\",\n  \"price\": 199.99,\n  \"description\": \"Product created by admin user\",\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/product/new",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"product",
+								"new"
+							]
+						},
+						"description": "Create a new product (admin only)"
+					},
+					"response": []
+				}
+		
+				
+			],
+			"description": "Endpoints that require admin authentication and role"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Pre-request script to set up any required variables",
+					"console.log('Making request to: ' + pm.request.url);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Test script to validate responses",
+					"pm.test('Status code is 200 or 201', function () {",
+					"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+					"});",
+					"",
+					"pm.test('Response has success property', function () {",
+					"    const jsonData = pm.response.json();",
+					"    pm.expect(jsonData).to.have.property('success');",
+					"});",
+					"",
+					"pm.test('Response time is less than 2000ms', function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:4001/api/v1",
+			"type": "string",
+			"description": "Base URL for the API server"
+		},
+		{
+			"key": "auth_token",
+			"value": "your_jwt_token_here",
+			"type": "string",
+			"description": "JWT token for authenticated user (replace with actual token)"
+		},
+		{
+			"key": "admin_token",
+			"value": "your_admin_jwt_token_here",
+			"type": "string",
+			"description": "JWT token for admin user (replace with actual token)"
+		}
+	]
+}
